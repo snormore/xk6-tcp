@@ -13,30 +13,30 @@ Then:
 
 1. Install `xk6`:
 
-  ```shell
-  go install github.com/k6io/xk6/cmd/xk6@latest
-  ```
+```shell
+go install github.com/k6io/xk6/cmd/xk6@latest
+```
 
 2. Build the binary:
 
-  ```shell
-  xk6 build master \
-    --with github.com/NAlexandrov/xk6-tcp
-  ```
+```shell
+xk6 build master \
+  --with github.com/snormore/xk6-tcp
+```
 
 ## Example
 
 ```javascript
-import tcp from 'k6/x/tcp';
-import { check } from 'k6';
+import tcp from "k6/x/tcp";
+import { check } from "k6";
 
-const conn = tcp.connect('host:port');
+const conn = tcp.connect("host:port");
 
 export default function () {
-  tcp.writeLn(conn, 'Say Hello');
-  let res = String.fromCharCode(...tcp.read(conn, 1024))
-  check (res, {
-    'verify ag tag': (res) => res.includes('Hello')
+  tcp.writeLn(conn, "Say Hello");
+  let res = String.fromCharCode(...tcp.read(conn, 1024));
+  check(res, {
+    "verify ag tag": (res) => res.includes("Hello"),
   });
   tcp.close(conn);
 }
